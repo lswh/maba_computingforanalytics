@@ -1,7 +1,7 @@
 #Define an R function that removes NA values from a vector.
 walana <- function(a) {
   return(a[!is.na(a)])}
-testdata <- c(1,3,5,NA,NA)
+testdata <- c(NA,7,22,3,2,15,67,9,NA,NA)
 walana(testdata)
 
 
