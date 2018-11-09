@@ -1,9 +1,32 @@
 #Define an R function that removes NA values from a vector.
+walana <- function(a) {
+  return(a[!is.na(a)])}
+testdata <- c(1,3,5,NA,NA)
+walana(testdata)
 
 
 #Define an R function that computes the factorial of given an integer argument. The output should be a vector of length 1.
+inputtest<-as.numeric(readline(prompt="Gimme your factorial!"))
+
+fctr <- function(input) {
+  x=1
+  factorial=input
+  
+  while(x<input) {
+    factorial <- factorial*x
+    x=x+1}
+  return(factorial)
+}
+
+fctr(inputtest)
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
+testdata <- matrix(1:9, nrow = 3, ncol = 3)
+
+determinant <- function(x) {
+  
+} 
+
 
 #Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
 
