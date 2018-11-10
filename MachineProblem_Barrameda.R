@@ -22,9 +22,21 @@ fctr <- function(input) {
 fctr(inputtest)
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
-testdata <- matrix(1:4, nrow = 2, ncol = 2)
+
+#Test variables so I can check my computation
+testdata <- matrix(nrow = 3, ncol = 3)
 testdata
-det(testdata)
+
+testdata[1,1]=0
+testdata[1,2]=2
+testdata[1,3]=1
+testdata[2,1]=3
+testdata[2,2]=-1
+testdata[2,3]=2
+testdata[3,1]=4
+testdata[3,2]=-4
+testdata[3,3]=1
+print(det(testdata))
 
 #Matrix Writer Function for input matrix
 
@@ -43,8 +55,11 @@ detrmntdos <- function(x) {
 } 
 
 detrmnttres <- function(x) {
-  #Basketweave Method formula
+  #Basketweave Method formula: 
+  tres <- x[1,1]*x[2,2]*x[3,3]+x[1,2]*x[2,3]*x[3,1]+x[1,3]*x[2,1]*x[3,2]-x[3,1]*x[2,2]*x[1,3]-x[3,2]*x[2,3]*x[1,1]-x[3,3]*x[2,1]*x[1,2]
+  return(tres)
 }
+detrmnttres(testdata)
 
 detrmntkwatro <- function(x) {
   
@@ -63,7 +78,7 @@ if (SqMtrxDmnsn==2) {
   detrmntkwatro(inputmatrix)
 } else if (SqMtrxDmnsn>4) {
   detrmntgeneral(inputmatrix)
-} else print("Hey, invalid matrix buddy!")
+} else print("Hey, invalid matrix yan, buddy!")
 
 
 #Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
