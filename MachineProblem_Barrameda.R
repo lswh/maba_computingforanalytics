@@ -1,3 +1,7 @@
+##Note: Kindly run using Source because it does not do the interactive prompt when clicking Run only. 
+##Thank you. 
+
+
 #Define an R function that removes NA values from a vector.
 walana <- function(a) {
   return(a[!is.na(a)])}
@@ -24,8 +28,6 @@ print(fctr(inputtest))
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
 
-##Note: Sir Elmer, please Source this, it does not do the interactive prompt when clicking Run only Thank you. 
-
 #Test variables so I can check my computation
 testdata <- matrix(nrow = 3, ncol = 3)
 testdata
@@ -51,7 +53,7 @@ inputmatrix <- matrix(0,nrow=SqMtrxDmnsn,ncol=SqMtrxDmnsn)
 for(i in 1:SqMtrxDmnsn)
   {for(j in 1:SqMtrxDmnsn)
   {
-  inputmatrix[i,j] <- as.numeric(readline(prompt="Enter element (left to right first from top to bottom row 1,1 then 1,2... 1,n, 2,1... 2,n)"))  
+  inputmatrix[i,j] <- as.numeric(readline(prompt="Enter element (L to R then Top to Bottom)"))  
   j=j+1
   }
   i=i+1
@@ -64,13 +66,9 @@ detrmntdos <- function(x) {
 } 
 
 detrmnttres <- function(x) {
-  #Basketweave Method formula: 
+  #Basketweave Method formula for a 3x3 Matrix: 
   tres <- x[1,1]*x[2,2]*x[3,3]+x[1,2]*x[2,3]*x[3,1]+x[1,3]*x[2,1]*x[3,2]-x[3,1]*x[2,2]*x[1,3]-x[3,2]*x[2,3]*x[1,1]-x[3,3]*x[2,1]*x[1,2]
   return(tres)
-}
-
-detrmntgeneral <- function(x) {
-  return(x)
 }
 
 #Matrix by Cofactors Loop Method (I will always use row 1 for expansion to simplify the algo)
@@ -95,11 +93,14 @@ if (SqMtrxDmnsn==2) {
 numericvector <- c(3,33,25,46,12,8,9,1,2)
 charactervector <- c("Luke Skywalker","Han Solo", "Chewbacca", "Darth Vader", "Princess Leia", "Obi Wan Kenobi")
 
-
+#Bubble Sort Algorithm
+SortThisThing <- function(x) {
+  
+}
 
 #Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator.
 
-#Create a function to compute for your net pay at work.
+#Required: Create a function to compute for your net pay at work.
 
 #Create a function that accepts a vector and and integer n and returns nth highest number
 
