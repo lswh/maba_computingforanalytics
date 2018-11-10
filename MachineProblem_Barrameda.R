@@ -70,14 +70,15 @@ detrmnttres <- function(x) {
 }
 
 detrmntgeneral <- function(x) {
-  return(det(x))
+  return(x)
 }
 
-#Matrix by Cofactors Loop Method (scale down until it's a 3x3 matrix to apply detrmnttres function and return the ultimate determinant)
-
-
-#Checker of my calculations
-det(x)
+#Matrix by Cofactors Loop Method (I will always use row 1 for expansion to simplify the algo)
+#Scale down until it's a 3x3 matrix to apply detrmnttres function from above and return the ultimate determinant)
+detrmntgeneral <- function(x) {
+  RecursionLevel <- SqMtrxDmnsn-3
+  return(RecursionLevel)
+}
 
 
 if (SqMtrxDmnsn==2) {
@@ -89,9 +90,12 @@ if (SqMtrxDmnsn==2) {
 } else print("Hey, invalid matrix yan, buddy!")
 
 
-
-
 #Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
+#Provided given vectors
+numericvector <- c(3,33,25,46,12,8,9,1,2)
+charactervector <- c("Luke Skywalker","Han Solo", "Chewbacca", "Darth Vader", "Princess Leia", "Obi Wan Kenobi")
+
+
 
 #Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator.
 
@@ -100,5 +104,17 @@ if (SqMtrxDmnsn==2) {
 #Create a function that accepts a vector and and integer n and returns nth highest number
 
 #Create a function that computes the compound interest of an investment given the rate, time, and initial amount or principal.
+Rate <-as.numeric(readline(prompt="Nominal interest rate in decimal"))
+Time <-as.numeric(readline(prompt="Time of investment in years"))
+Compounds <-as.numeric(readline(prompt="Compounding periods per year"))
+Principal<-as.numeric(readline(prompt="Principal amount"))
+
+CompoundInterest <- function(x,y,z,w) {
+  Acompound <- w*(1+(x/z))^(y*z)
+  cat("Accrued amount or compounded amount is ", Acompound)
+  return(Acompound)
+}
+
+CompoundInterest(Rate,Time,Compounds,Principal)
 
 #Create a function isPrime(n) that accepts an integer and outputs a Boolean value (TRUE or FALSE) depending whether the integer is a prime number or not.
