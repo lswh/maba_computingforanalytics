@@ -22,8 +22,10 @@ fctr(inputtest)
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
 testdata <- matrix(1:9, nrow = 3, ncol = 3)
+testdata
+det(testdata)
 
-determinant <- function(x) {
+detrmnt <- function(x) {
   
 } 
 
