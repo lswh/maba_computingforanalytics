@@ -73,6 +73,8 @@ detrmntgeneral <- function(x) {
   return(det(x))
 }
 
+#Matrix by Cofactors Loop Method (scale down until it's a 3x3 matrix to apply detrmnttres function and return the ultimate determinant)
+
 
 #Checker of my calculations
 det(x)
