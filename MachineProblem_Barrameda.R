@@ -3,6 +3,7 @@ walana <- function(a) {
   return(a[!is.na(a)])}
 testdata <- c(NA,7,22,3,2,15,67,9,NA,NA)
 walana(testdata)
+print(testdata)
 
 
 #Define an R function that computes the factorial of given an integer argument. The output should be a vector of length 1.
@@ -21,13 +22,48 @@ fctr <- function(input) {
 fctr(inputtest)
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
-testdata <- matrix(1:9, nrow = 3, ncol = 3)
+testdata <- matrix(1:4, nrow = 2, ncol = 2)
 testdata
 det(testdata)
 
-detrmnt <- function(x) {
+#Matrix Writer Function for input matrix
+
+
+#Get the dimension of the matrix first
+SqMtrxDmnsn <-as.numeric(readline(prompt="Dimension of square matrix"))
+
+inputmatrix <- matrix(nrow=SqMtrxDmnsn,ncol=SqMtrxDmnsn)
+
+print(inputmatrix)
+
+detrmntdos <- function(x) {
+  #Basic determinant formula
+  dos<-x[1,1]*x[2,2]-x[1,2]*x[2,1]
+  return(dos)
+} 
+
+detrmnttres <- function(x) {
+  #Basketweave Method formula
+}
+
+detrmntkwatro <- function(x) {
   
 } 
+
+detrmntgeneral <- function(x) {
+  
+}
+
+
+if (SqMtrxDmnsn==2) {
+  detrmntdos(inputmatrix)
+} else if (SqMtrxDmnsn==3) {
+  detrmnttres(inputmatrix)
+} else if (SqMtrxDmnsn==4) {
+  detrmntkwatro(inputmatrix)
+} else if (SqMtrxDmnsn>4) {
+  detrmntgeneral(inputmatrix)
+} else print("Hey, invalid matrix buddy!")
 
 
 #Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
