@@ -205,20 +205,24 @@ CompoundInterest <- function(x,y,z,w) {
 
 CompoundInterest(Rate,Time,Compounds,Principal)
 
+
+
 #Create a function isPrime(n) that accepts an integer and outputs a Boolean value (TRUE or FALSE) depending whether the integer is a prime number or not.
 numero <-as.integer(readline(prompt="Prime or Not? Enter the integer."))
 
 isPrime <- function(n) {
-   m<-ceiling(sqrt(n))
-   if(n==1) {return(FALSE)}
-   else if(n==2|n==3) {return(TRUE)}
-   else if(n>3) {
-     while(m>=2){
-     saywhat<-!is.integer(n/m)
-     return(saywhat)
-     m=m-1
-     }
-   }
+  m<-ceiling(sqrt(n))
+  if(n==1) {return(FALSE)}
+  else if(n==2|n==3) {return(TRUE)}
+  else if(n>3) {
+    while(m>=2){
+      saywhat<-!is.integer(n/m)
+      return(saywhat)
+      m=m-1
+    }
+  }
 }
 
 isPrime(numero)
+
+
