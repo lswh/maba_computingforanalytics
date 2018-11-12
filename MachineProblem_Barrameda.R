@@ -43,11 +43,30 @@ testdata[3,2]=-4
 testdata[3,3]=1
 print(det(testdata))
 
+testdata2 <- matrix(nrow=4,ncol=4)
+testdata2[1,1]=0
+testdata2[1,2]=2
+testdata2[1,3]=1
+testdata2[1,4]=3
+testdata2[2,1]=-1
+testdata2[2,2]=2
+testdata2[2,3]=-1
+testdata2[2,4]=2
+testdata2[3,1]=4
+testdata2[3,2]=-4
+testdata2[3,3]=1
+testdata2[3,4]=0
+testdata2[4,1]=34
+testdata2[4,2]=1
+testdata2[4,3]=4
+testdata2[4,4]=-1
+det(testdata2)
+
 
 #Get the dimension of the matrix first
 SqMtrxDmnsn <-as.numeric(readline(prompt="Dimension of square matrix"))
-
 inputmatrix <- matrix(0,nrow=SqMtrxDmnsn,ncol=SqMtrxDmnsn)
+
 #Initializer that prompts user to enter the elements of the matrix
 #Matrix Writer Function for input matrix
 for(i in 1:SqMtrxDmnsn)
@@ -72,11 +91,23 @@ detrmnttres <- function(x) {
 }
 
 #Matrix by Cofactors Loop Method (I will always use row 1 for expansion to simplify the algo)
-#Scale down until it's a 3x3 matrix to apply detrmnttres function from above and return the ultimate determinant)
+#If I still have time: Scale down until it's a 3x3 matrix to apply detrmnttres function from above and return the ultimate determinant
+#If Murphy's law: I'll use det for matrices higher than 3x3 but improve this code before end of term. 
 detrmntgeneral <- function(x) {
-  RecursionLevel <- SqMtrxDmnsn-3
-  return(RecursionLevel)
+  totalna=0
+  for(col in 1:ncol(x)) {
+    submat <- x[-1,(-1*col)]
+    print(submat)
+    detexpansion<-x[1,col]*(-1^(1+col))*det(submat)
+    totalna=detexpansion+totalna
+    print(totalna)
+    col=col+1
+    return(totalna)
+  }
+
 }
+
+detrmntgeneral(testdata2)
 
 
 if (SqMtrxDmnsn==2) {
@@ -99,6 +130,40 @@ SortThisThing <- function(x) {
 }
 
 #Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator.
+FlyLikeaPosix <-as.numeric(readline(prompt="I am the oracle that tells you the day of the POSIXct. Enter the number here."))
+
+# Origin is a Thursday - Jan 1 1970
+
+PosixDayPredictor <- function(x) {
+  days<-x/86400
+  print(days)
+  dayslang <- trunc(days)
+  newx <- as.POSIXct(x,tz="UTC", origin = '1970-01-01')
+  if(x<86400) {
+    day<-"Thursday"
+  } else if (x>86400&&x<172800) {
+    day<-"Friday"
+  } else if(x>604800&&dayslang%%8==0) {
+    day<- "Friday"
+  } else if(dayslang%%7==0){
+    day<-"Thursday"
+  } else if(dayslang%%6==0) {
+    day<-"Wednesday"
+  } else if(dayslang%%5==0) {
+    day<-"Tuesday"
+  } else if(dayslang%%4==0) {
+    day<-"Monday"
+  } else if(dayslang%%3==0) {
+    day<-"Sunday"
+  } else if(dayslang%%2==0) {
+    day<-"Saturday"
+  }
+  print(day)
+  print(newx)
+  return(day)
+}
+
+PosixDayPredictor(FlyLikeaPosix)
 
 #Required: Create a function to compute for your net pay at work.
 
