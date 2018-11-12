@@ -92,7 +92,7 @@ detrmnttres <- function(x) {
 
 #Matrix by Cofactors Loop Method (I will always use row 1 for expansion to simplify the algo)
 #If I still have time: Scale down until it's a 3x3 matrix to apply detrmnttres function from above and return the ultimate determinant
-#If Murphy's law: I'll use det for matrices higher than 3x3 but improve this code before end of term. 
+#If Murphy's law at work: I'll use det for matrices higher than 3x3 but improve this code before end of term. 
 detrmntgeneral <- function(x) {
   totalna=0
   col=1
@@ -113,6 +113,8 @@ detrmntgeneral <- function(x) {
   return(cofactorsum)
   
 }
+
+detrmntgeneral(testdata2)
 
 
 if (SqMtrxDmnsn==2) {
@@ -204,3 +206,19 @@ CompoundInterest <- function(x,y,z,w) {
 CompoundInterest(Rate,Time,Compounds,Principal)
 
 #Create a function isPrime(n) that accepts an integer and outputs a Boolean value (TRUE or FALSE) depending whether the integer is a prime number or not.
+numero <-as.integer(readline(prompt="Prime or Not? Enter the integer."))
+
+isPrime <- function(n) {
+   m<-ceiling(sqrt(n))
+   if(n==1) {return(FALSE)}
+   else if(n==2|n==3) {return(TRUE)}
+   else if(n>3) {
+     while(m>=2){
+     saywhat<-!is.integer(n/m)
+     return(saywhat)
+     m=m-1
+     }
+   }
+}
+
+isPrime(numero)
