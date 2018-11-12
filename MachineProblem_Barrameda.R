@@ -165,7 +165,21 @@ PosixDayPredictor <- function(x) {
 
 PosixDayPredictor(FlyLikeaPosix)
 
-#Required: Create a function to compute for your net pay at work.
+#Required: Create a function to compute for your net pay at work. (Actual rate is confidential.)
+## Base pay calculation for 50k per month
+
+monthlygross=50000
+
+SalaryCalculator <- function(y) {
+  #SSS Philhealth and PAGIBIG
+  taxableincome <- y-581.30-437.50-100
+  #15% deduction
+  netpay <- 0.85*taxableincome
+  print(netpay)
+  return(netpay)
+}
+
+SalaryCalculator(monthlygross)
 
 #Create a function that accepts a vector and and integer n and returns nth highest number
 
