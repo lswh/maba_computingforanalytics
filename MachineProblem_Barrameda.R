@@ -95,19 +95,24 @@ detrmnttres <- function(x) {
 #If Murphy's law: I'll use det for matrices higher than 3x3 but improve this code before end of term. 
 detrmntgeneral <- function(x) {
   totalna=0
-  for(col in 1:ncol(x)) {
-    submat <- x[-1,(-1*col)]
-    print(submat)
-    detexpansion<-x[1,col]*(-1^(1+col))*det(submat)
-    totalna=detexpansion+totalna
-    print(totalna)
+  col=1
+  cofactorsum=0
+  while(col<=ncol(x)) {
+    cofactorthing<-x[-1,(-1*col)]
+    print(det(cofactorthing))
+    multiplier<-(-1)^(1+col)
+    element<-x[1,col]
+    print(multiplier)
+    print(element)
+    print(element*multiplier*det(cofactorthing))
+    yup <- element*multiplier*det(cofactorthing)
+    cofactorsum = cofactorsum + yup
+    print(cofactorsum)
     col=col+1
-    return(totalna)
   }
-
+  return(cofactorsum)
+  
 }
-
-detrmntgeneral(testdata2)
 
 
 if (SqMtrxDmnsn==2) {
@@ -167,6 +172,7 @@ PosixDayPredictor(FlyLikeaPosix)
 
 #Required: Create a function to compute for your net pay at work. (Actual rate is confidential.)
 ## Base pay calculation for 50k per month
+## Ideal: Code TRAIN LAW; Murphy's Law Version: Just a single bracket
 
 monthlygross=50000
 
