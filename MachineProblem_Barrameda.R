@@ -2,7 +2,7 @@
 ##Thank you. 
 
 
-#Define an R function that removes NA values from a vector.
+#Define an R function that removes NA values from a vector. -- WORKING
 walana <- function(a) {
   return(a[!is.na(a)])}
 testdata <- c(NA,7,22,3,2,15,67,9,NA,NA)
@@ -10,7 +10,7 @@ walana(testdata)
 print(testdata)
 
 
-#Define an R function that computes the factorial of given an integer argument. The output should be a vector of length 1.
+#Define an R function that computes the factorial of given an integer argument. The output should be a vector of length 1. -- WORKING
 inputtest<-as.numeric(readline(prompt="Gimme your factorial!"))
 
 fctr <- function(input) {
@@ -27,7 +27,7 @@ fctr(inputtest)
 print(fctr(inputtest))
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
-
+#Work in Progress
 #Test variables so I can check my computation
 testdata <- matrix(nrow = 3, ncol = 3)
 testdata
@@ -127,6 +127,7 @@ if (SqMtrxDmnsn==2) {
 
 
 #Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
+#Work in Progress
 #Provided given vectors
 numericvector <- c(3,33,25,46,12,8,9,1,2)
 charactervector <- c("Luke Skywalker","Han Solo", "Chewbacca", "Darth Vader", "Princess Leia", "Obi Wan Kenobi")
@@ -154,7 +155,7 @@ print(numberoutput)
 charoutput <- SortThisThing(charactervector)
 print(charactervector)
 
-#Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator.
+#Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator. -- WORKING
 FlyLikeaPosix <-as.numeric(readline(prompt="I am the oracle that tells you the day of the POSIXct. Enter the number here."))
 
 # Origin is a Thursday - Jan 1 1970
@@ -190,7 +191,7 @@ PosixDayPredictor <- function(x) {
 
 PosixDayPredictor(FlyLikeaPosix)
 
-#Required: Create a function to compute for your net pay at work. (Actual rate is confidential.)
+#Required: Create a function to compute for your net pay at work. (Actual rate is confidential.) -- WORKING
 ## Base pay calculation for 50k per month
 ## Ideal: Code TRAIN LAW; Murphy's Law Version: Just a single bracket
 
@@ -209,7 +210,7 @@ SalaryCalculator(monthlygross)
 
 #Create a function that accepts a vector and and integer n and returns nth highest number
 
-#Create a function that computes the compound interest of an investment given the rate, time, and initial amount or principal.
+#Create a function that computes the compound interest of an investment given the rate, time, and initial amount or principal. -- WORKING
 Rate <-as.numeric(readline(prompt="Nominal interest rate in decimal"))
 Time <-as.numeric(readline(prompt="Time of investment in years"))
 Compounds <-as.numeric(readline(prompt="Compounding periods per year"))
@@ -226,6 +227,7 @@ CompoundInterest(Rate,Time,Compounds,Principal)
 
 
 #Create a function isPrime(n) that accepts an integer and outputs a Boolean value (TRUE or FALSE) depending whether the integer is a prime number or not.
+#Work in Progress
 numero <-as.integer(readline(prompt="Prime or Not? Enter the integer."))
 
 isPrime <- function(n) {
