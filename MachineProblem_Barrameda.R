@@ -13,18 +13,15 @@ print(testdata)
 #Define an R function that computes the factorial of given an integer argument. The output should be a vector of length 1. -- WORKING
 inputtest<-as.numeric(readline(prompt="Gimme your factorial!"))
 
-fctr <- function(input) {
-  x=1
-  factorial=input
-  
-  while(x<input) {
-    factorial <- factorial*x
-    x=x+1}
-  return(factorial)
+FactorialFun <- function(x) {
+  if (x==1) {  
+    x=1  
+  } else {      
+    return(x*FactorialFun(x-1));
+  }
 }
 
-fctr(inputtest)
-print(fctr(inputtest))
+print(FactorialFun(inputtest))
 
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
 #Work in Progress
