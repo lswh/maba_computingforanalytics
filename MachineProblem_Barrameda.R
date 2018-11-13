@@ -131,10 +131,28 @@ if (SqMtrxDmnsn==2) {
 numericvector <- c(3,33,25,46,12,8,9,1,2)
 charactervector <- c("Luke Skywalker","Han Solo", "Chewbacca", "Darth Vader", "Princess Leia", "Obi Wan Kenobi")
 
-#Bubble Sort Algorithm
-SortThisThing <- function(x) {
-  
+#Bubble Sort for Numeric Vector
+SortThisThing <- function(x){
+  n<-length(x)
+  for(j in 1:(n-1)){
+    for(i in 1:(n-j)){
+      if(x[i]<x[i+1]){
+        temp<-x[i]
+        x[i]<-x[i+1]
+        x[i+1]<-temp
+      }
+    }
+  }
+  return(x)
 }
+
+#Working
+numberoutput <- SortThisThing(numericvector)
+print(numberoutput)
+
+#Not working yet =( 
+charoutput <- SortThisThing(charactervector)
+print(charactervector)
 
 #Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator.
 FlyLikeaPosix <-as.numeric(readline(prompt="I am the oracle that tells you the day of the POSIXct. Enter the number here."))
@@ -217,6 +235,7 @@ isPrime <- function(n) {
   else if(n>3) {
     while(m>=2){
       saywhat<-!is.integer(n/m)
+      print(saywhat)
       return(saywhat)
       m=m-1
     }
