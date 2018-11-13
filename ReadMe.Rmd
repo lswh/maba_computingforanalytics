@@ -1,4 +1,4 @@
-### This is H's dirty kitchen for R code for Computing for Analytics. 
+### This is H's dirty kitchen for R code for Computing for Analytics Requirements. 
 
 ###Contents:
 ```
