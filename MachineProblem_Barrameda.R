@@ -232,8 +232,8 @@ isPrime <- function(n) {
   if(n==1) {return(FALSE)}
   else if(n==2|n==3) {return(TRUE)}
   else if(n>3) {
-    while(m>=2){
-      saywhat<-!is.integer(n/m)
+    while(!is.integer(n/m)&&m>=2){
+      saywhat<-
       print(saywhat)
       return(saywhat)
       m=m-1
