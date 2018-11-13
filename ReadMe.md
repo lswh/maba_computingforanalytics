@@ -1,6 +1,6 @@
 ### This is H's dirty kitchen for R code for Computing for Analytics Requirements. 
 
-###Contents:
+Contents:
 ```
 Assignment1
 Machine Problem
