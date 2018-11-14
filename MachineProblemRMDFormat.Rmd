@@ -96,7 +96,7 @@ SalaryCalculatorv2 <- function (basic.monthly, allowance.nontax = 0, allowance.t
     return(net.monthly)
   }
 
-SalaryCalculator(monthlygross)
+SalaryCalculatorv2(monthlygross)
 
 ```
 
