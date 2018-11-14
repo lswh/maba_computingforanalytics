@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Working 5 Problems
+#Working 6 Problems
 
 ##1-WalaNA - The Function that Removes the NA Values in a Vector
 
@@ -24,7 +24,7 @@ print(testdata)
 ```
 
 ##2 - Recursive Factorial Function
-```{r}
+```
 inputtest<-as.numeric(readline(prompt="Gimme your factorial!"))
 
 FactorialFun <- function(x) {
@@ -40,7 +40,7 @@ print(FactorialFun(inputtest))
 
 ##3 - Fly Like a POSIX Day Predictor
 
-```{r}
+```
 #Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator. -- WORKING
 FlyLikeaPosix <-as.numeric(readline(prompt="I am the oracle that tells you the day of the POSIXct. Enter the number here."))
 
@@ -80,7 +80,7 @@ PosixDayPredictor(FlyLikeaPosix)
 
 ## 4 - The Monthly Net Pay Calculator
 
-```{r}
+```
 monthlygross=50000
 
 SalaryCalculator <- function(y) {
@@ -98,7 +98,7 @@ SalaryCalculator(monthlygross)
 
 ## 5 - Compound Interest Calculator
 
-```{r}
+```
 #Create a function that computes the compound interest of an investment given the rate, time, and initial amount or principal. -- WORKING
 Rate <-as.numeric(readline(prompt="Nominal interest rate in decimal"))
 Time <-as.numeric(readline(prompt="Time of investment in years"))
@@ -114,11 +114,29 @@ CompoundInterest <- function(x,y,z,w) {
 CompoundInterest(Rate,Time,Compounds,Principal)
 ```
 
+##6 - Nth Highest Number of a Vector
+``` 
+#Create a function that accepts a vector and and integer n and returns nth highest number
+numericvector <- c(3,33,25,46,12,8,9,1,2)
+
+NthHighestNumber <- function(x,y) {
+  x<-sort(x,decreasing=TRUE)
+  element<-x[y]
+  return(element)
+}
+
+#Test
+NthHighestNumber(numericvector,2)
+```
+
+
 #Coding Still In-Progress
+
+### Don't have much time because work and life happens. =(
 
 ## SortThingThing -- Bubble Sort for Character/Numeric Vector
 
-```{r}
+```
 #Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
 #Work in Progress
 #Provided given vectors
@@ -151,7 +169,7 @@ print(charactervector)
 
 ## Prime Number Detector
 
-```{r}
+```
 numero <-as.integer(readline(prompt="Prime or Not? Enter the integer."))
 
 isPrime <- function(n) {
@@ -174,7 +192,7 @@ isPrime(numero)
 ## Determinant Determination 
 ### Works for 2x2 and 3x3 already. Still figuring out recursion for cofactors.
 
-``` {r}
+```
 #Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
 #Work in Progress
 #Test variables so I can check my computation

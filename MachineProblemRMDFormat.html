@@ -131,15 +131,17 @@ $(document).ready(function () {
 </div>
 
 
-<div id="working-5-problems" class="section level1">
-<h1>Working 5 Problems</h1>
+<div id="working-6-problems" class="section level1">
+<h1>Working 6 Problems</h1>
 <div id="walana---the-function-that-removes-the-na-values-in-a-vector" class="section level2">
 <h2>1-WalaNA - The Function that Removes the NA Values in a Vector</h2>
-<pre><code>walana &lt;- function(a) {
+<pre class="r"><code>walana &lt;- function(a) {
   return(a[!is.na(a)])}
 testdata &lt;- c(NA,7,22,3,2,15,67,9,NA,NA)
-walana(testdata)
-print(testdata)</code></pre>
+walana(testdata)</code></pre>
+<pre><code>## [1]  7 22  3  2 15 67  9</code></pre>
+<pre class="r"><code>print(testdata)</code></pre>
+<pre><code>##  [1] NA  7 22  3  2 15 67  9 NA NA</code></pre>
 </div>
 <div id="recursive-factorial-function" class="section level2">
 <h2>2 - Recursive Factorial Function</h2>
@@ -225,9 +227,26 @@ CompoundInterest &lt;- function(x,y,z,w) {
 
 CompoundInterest(Rate,Time,Compounds,Principal)</code></pre>
 </div>
+<div id="nth-highest-number-of-a-vector" class="section level2">
+<h2>6 - Nth Highest Number of a Vector</h2>
+<pre><code>#Create a function that accepts a vector and and integer n and returns nth highest number
+numericvector &lt;- c(3,33,25,46,12,8,9,1,2)
+
+NthHighestNumber &lt;- function(x,y) {
+  x&lt;-sort(x,decreasing=TRUE)
+  element&lt;-x[y]
+  return(element)
+}
+
+#Test
+NthHighestNumber(numericvector,2)</code></pre>
+</div>
 </div>
 <div id="coding-still-in-progress" class="section level1">
 <h1>Coding Still In-Progress</h1>
+<div id="dont-have-much-time-because-work-and-life-happens." class="section level3">
+<h3>Don’t have much time because work and life happens. =(</h3>
+</div>
 <div id="sortthingthing-bubble-sort-for-characternumeric-vector" class="section level2">
 <h2>SortThingThing – Bubble Sort for Character/Numeric Vector</h2>
 <pre><code>#Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.

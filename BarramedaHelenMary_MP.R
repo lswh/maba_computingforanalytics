@@ -206,6 +206,15 @@ SalaryCalculator <- function(y) {
 SalaryCalculator(monthlygross)
 
 #Create a function that accepts a vector and and integer n and returns nth highest number
+numericvector <- c(3,33,25,46,12,8,9,1,2)
+
+NthHighestNumber <- function(x,y) {
+  x<-sort(x,decreasing=TRUE)
+  element<-x[y]
+  return(element)
+}
+
+NthHighestNumber(numericvector,2)
 
 #Create a function that computes the compound interest of an investment given the rate, time, and initial amount or principal. -- WORKING
 Rate <-as.numeric(readline(prompt="Nominal interest rate in decimal"))
