@@ -205,6 +205,24 @@ SalaryCalculator <- function(y) {
 
 SalaryCalculator(monthlygross)
 
+
+##Version 2 Annual and with TRAIN Law
+SalaryCalculatorv2 <- function (basic.monthly, allowance.nontax = 0, allowance.tax = 0) {
+    annual.taxable = (basic.monthly + allowance.tax) * 12
+    if (annual.taxable <= 250000) {tax = 0}
+    else if (annual.taxable <= 400000) {tax = (annual.taxable - 250000) * 0.2} 
+    else if (annual.taxable <= 800000) {tax = 30000 + (annual.taxable - 400000) * 0.25}
+    else if (annual.taxable <= 2000000) {tax = 130000 + (annual.taxable - 800000) * 0.3}
+    else if (annual.taxable <= 8000000) {tax = 490000 + (annual.taxable - 2000000) *0.32}
+    else {tax = 2410000 + (annual.taxable - 8000000) * 0.35}
+    
+    net.monthly = basic.monthly + allowance.nontax + allowance.tax - (tax/12)
+    
+    return(net.monthly)
+  }
+
+SalaryCalculator(monthlygross)
+
 #Create a function that accepts a vector and and integer n and returns nth highest number
 numericvector <- c(3,33,25,46,12,8,9,1,2)
 
