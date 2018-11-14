@@ -203,7 +203,7 @@ SalaryCalculator <- function(y) {
   return(netpay)
 }
 
-SalaryCalculator(monthlygross)
+SalaryCalculatorv2(monthlygross)
 
 
 ##Version 2 Annual and with TRAIN Law
