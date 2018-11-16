@@ -9,7 +9,7 @@ Machine Problem
 ###Assignmant1
 ```
 Demonstrated navigating through RStudio with commands like subsetting, working with different data types and objects using the following datasets:
-- NBA Stats
+- Basketball Statistics
 - University Ranking
 ```
 
