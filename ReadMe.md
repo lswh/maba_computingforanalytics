@@ -2,7 +2,7 @@
 
 Contents:
 ```
-Assignment1
+Assignment 1
 Machine Problem
 ```
 
@@ -16,7 +16,7 @@ Demonstrated navigating through RStudio with commands like subsetting, working w
 ```
 
 
-### Machine Problem
+### BarramedaHelenMary_MP.R
 ```
 Choose 5 functions and execute functions out of them. Arranged version is on the Rmd file.
 ```
