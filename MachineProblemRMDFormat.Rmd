@@ -82,17 +82,21 @@ PosixDayPredictor(FlyLikeaPosix)
 
 ```
 monthlygross=50000
+SalaryCalculatorv2 <- function (basic.monthly, allowance.nontax = 0, allowance.tax = 0) {
+    annual.taxable = (basic.monthly + allowance.tax) * 12
+    if (annual.taxable <= 250000) {tax = 0}
+    else if (annual.taxable <= 400000) {tax = (annual.taxable - 250000) * 0.2} 
+    else if (annual.taxable <= 800000) {tax = 30000 + (annual.taxable - 400000) * 0.25}
+    else if (annual.taxable <= 2000000) {tax = 130000 + (annual.taxable - 800000) * 0.3}
+    else if (annual.taxable <= 8000000) {tax = 490000 + (annual.taxable - 2000000) *0.32}
+    else {tax = 2410000 + (annual.taxable - 8000000) * 0.35}
+    
+    net.monthly = basic.monthly + allowance.nontax + allowance.tax - (tax/12)
+    
+    return(net.monthly)
+  }
 
-SalaryCalculator <- function(y) {
-  #SSS Philhealth and PAGIBIG
-  taxableincome <- y-581.30-437.50-100
-  #15% deduction
-  netpay <- 0.85*taxableincome
-  print(netpay)
-  return(netpay)
-}
-
-SalaryCalculator(monthlygross)
+SalaryCalculatorv2(monthlygross)
 
 ```
 
