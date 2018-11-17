@@ -4,18 +4,16 @@
 
 ## Clean the Dataset using R
 
-### Raw Dataset
-### Tidied Dataset
-### Code Book
-### Recipe for Cleaning the Dataset
+* Raw Dataset
+* Tidied Dataset
+* Code Book
+* Recipe for Cleaning the Dataset
 
 ### Potential Sources of Data: 
-```
-1. Google Analytics Data
-2. KPI SPreadsheet
-3. Revenue Reports
-4. Website and Screening Data with Geos
-```
+* Google Analytics Data
+* KPI SPreadsheet
+* Revenue Reports
+* Website and Screening Data with Geos
 
 ## Explore the Graphs
 
