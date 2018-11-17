@@ -128,40 +128,317 @@
 \begin{document}
 \maketitle
 
-\subsection{R Markdown}\label{r-markdown}
+\section{Working 6 Problems}\label{working-6-problems}
 
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see \url{http://rmarkdown.rstudio.com}.
-
-When you click the \textbf{Knit} button a document will be generated
-that includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
+\subsection{1-WalaNA - The Function that Removes the NA Values in a
+Vector}\label{walana---the-function-that-removes-the-na-values-in-a-vector}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(cars)}
+\NormalTok{walana <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(a) \{}
+  \KeywordTok{return}\NormalTok{(a[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(a)])\}}
+\NormalTok{testdata <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{67}\NormalTok{,}\DecValTok{9}\NormalTok{,}\OtherTok{NA}\NormalTok{,}\OtherTok{NA}\NormalTok{)}
+\KeywordTok{walana}\NormalTok{(testdata)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
+## [1]  7 22  3  2 15 67  9
 \end{verbatim}
 
-\subsection{Including Plots}\label{including-plots}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(testdata)}
+\end{Highlighting}
+\end{Shaded}
 
-You can also embed plots, for example:
+\begin{verbatim}
+##  [1] NA  7 22  3  2 15 67  9 NA NA
+\end{verbatim}
 
-\includegraphics{MachineProblemRMDFormat_files/figure-latex/pressure-1.pdf}
+\subsection{2 - Recursive Factorial
+Function}\label{recursive-factorial-function}
 
-Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
-chunk to prevent printing of the R code that generated the plot.
+\begin{verbatim}
+inputtest<-as.numeric(readline(prompt="Gimme your factorial!"))
+
+FactorialFun <- function(x) {
+  if (x==1) {  
+    x=1  
+  } else {      
+    return(x*FactorialFun(x-1));
+  }
+}
+
+print(FactorialFun(inputtest))
+\end{verbatim}
+
+\subsection{3 - Fly Like a POSIX Day
+Predictor}\label{fly-like-a-posix-day-predictor}
+
+\begin{verbatim}
+#Define an R function that accepts a Date (POSIXct) as argument and outputs the day of the week as characters. Use modulo operator. -- WORKING
+FlyLikeaPosix <-as.numeric(readline(prompt="I am the oracle that tells you the day of the POSIXct. Enter the number here."))
+
+# Origin is a Thursday - Jan 1 1970
+
+PosixDayPredictor <- function(x) {
+  days<-x/86400
+  print(days)
+  dayslang <- trunc(days)
+  newx <- as.POSIXct(x,tz="UTC", origin = '1970-01-01')
+  if(x<86400) {
+    day<-"Thursday"
+  } else if (x>86400&&x<172800) {
+    day<-"Friday"
+  } else if(x>604800&&dayslang%%8==0) {
+    day<- "Friday"
+  } else if(dayslang%%7==0){
+    day<-"Thursday"
+  } else if(dayslang%%6==0) {
+    day<-"Wednesday"
+  } else if(dayslang%%5==0) {
+    day<-"Tuesday"
+  } else if(dayslang%%4==0) {
+    day<-"Monday"
+  } else if(dayslang%%3==0) {
+    day<-"Sunday"
+  } else if(dayslang%%2==0) {
+    day<-"Saturday"
+  }
+  print(day)
+  print(newx)
+  return(day)
+}
+
+PosixDayPredictor(FlyLikeaPosix)
+\end{verbatim}
+
+\subsection{4 - The Monthly Net Pay
+Calculator}\label{the-monthly-net-pay-calculator}
+
+\begin{verbatim}
+monthlygross=50000
+SalaryCalculatorv2 <- function (basic.monthly, allowance.nontax = 0, allowance.tax = 0) {
+    annual.taxable = (basic.monthly + allowance.tax) * 12
+    if (annual.taxable <= 250000) {tax = 0}
+    else if (annual.taxable <= 400000) {tax = (annual.taxable - 250000) * 0.2} 
+    else if (annual.taxable <= 800000) {tax = 30000 + (annual.taxable - 400000) * 0.25}
+    else if (annual.taxable <= 2000000) {tax = 130000 + (annual.taxable - 800000) * 0.3}
+    else if (annual.taxable <= 8000000) {tax = 490000 + (annual.taxable - 2000000) *0.32}
+    else {tax = 2410000 + (annual.taxable - 8000000) * 0.35}
+    
+    net.monthly = basic.monthly + allowance.nontax + allowance.tax - (tax/12)
+    
+    return(net.monthly)
+  }
+
+SalaryCalculatorv2(monthlygross)
+\end{verbatim}
+
+\subsection{5 - Compound Interest
+Calculator}\label{compound-interest-calculator}
+
+\begin{verbatim}
+#Create a function that computes the compound interest of an investment given the rate, time, and initial amount or principal. -- WORKING
+Rate <-as.numeric(readline(prompt="Nominal interest rate in decimal"))
+Time <-as.numeric(readline(prompt="Time of investment in years"))
+Compounds <-as.numeric(readline(prompt="Compounding periods per year"))
+Principal<-as.numeric(readline(prompt="Principal amount"))
+
+CompoundInterest <- function(x,y,z,w) {
+  Acompound <- w*(1+(x/z))^(y*z)
+  cat("Accrued amount or compounded amount is ", Acompound)
+  return(Acompound)
+}
+
+CompoundInterest(Rate,Time,Compounds,Principal)
+\end{verbatim}
+
+\subsection{6 - Nth Highest Number of a
+Vector}\label{nth-highest-number-of-a-vector}
+
+\begin{verbatim}
+#Create a function that accepts a vector and and integer n and returns nth highest number
+numericvector <- c(3,33,25,46,12,8,9,1,2)
+
+NthHighestNumber <- function(x,y) {
+  x<-sort(x,decreasing=TRUE)
+  element<-x[y]
+  return(element)
+}
+
+#Test
+NthHighestNumber(numericvector,2)
+\end{verbatim}
+
+\section{Coding Still In-Progress}\label{coding-still-in-progress}
+
+\subsubsection{Don't have much time because work and life happens.
+=(}\label{dont-have-much-time-because-work-and-life-happens.}
+
+\subsection{SortThingThing -- Bubble Sort for Character/Numeric
+Vector}\label{sortthingthing-bubble-sort-for-characternumeric-vector}
+
+\begin{verbatim}
+#Define an R function that sorts a given vector in decreasing order. The output should be a vector of the same length. It should accept both numeric or character vectors.
+#Work in Progress
+#Provided given vectors
+numericvector <- c(3,33,25,46,12,8,9,1,2)
+charactervector <- c("Luke Skywalker","Han Solo", "Chewbacca", "Darth Vader", "Princess Leia", "Obi Wan Kenobi")
+
+#Bubble Sort for Numeric Vector
+SortThisThing <- function(x){
+  n<-length(x)
+  for(j in 1:(n-1)){
+    for(i in 1:(n-j)){
+      if(x[i]<x[i+1]){
+        temp<-x[i]
+        x[i]<-x[i+1]
+        x[i+1]<-temp
+      }
+    }
+  }
+  return(x)
+}
+
+#Working
+numberoutput <- SortThisThing(numericvector)
+print(numberoutput)
+
+#Not working yet =( 
+charoutput <- SortThisThing(charactervector)
+print(charactervector)
+\end{verbatim}
+
+\subsection{Prime Number Detector}\label{prime-number-detector}
+
+\begin{verbatim}
+numero <-as.integer(readline(prompt="Prime or Not? Enter the integer."))
+
+isPrime <- function(n) {
+  m<-ceiling(sqrt(n))
+  if(n==1) {return(FALSE)}
+  else if(n==2|n==3) {return(TRUE)}
+  else if(n>3) {
+    while(!is.integer(n/m)&&m>=2){
+      saywhat<-
+      print(saywhat)
+      return(saywhat)
+      m=m-1
+    }
+  }
+}
+
+isPrime(numero)
+\end{verbatim}
+
+\subsection{Determinant Determination}\label{determinant-determination}
+
+\subsubsection{Works for 2x2 and 3x3 already. Still figuring out
+recursion for
+cofactors.}\label{works-for-2x2-and-3x3-already.-still-figuring-out-recursion-for-cofactors.}
+
+\begin{verbatim}
+#Define an R function that computes the determinant of a given matrix. The output should be a vector of length 1.
+#Work in Progress
+#Test variables so I can check my computation
+testdata <- matrix(nrow = 3, ncol = 3)
+testdata
+
+testdata[1,1]=0
+testdata[1,2]=2
+testdata[1,3]=1
+testdata[2,1]=3
+testdata[2,2]=-1
+testdata[2,3]=2
+testdata[3,1]=4
+testdata[3,2]=-4
+testdata[3,3]=1
+print(det(testdata))
+
+testdata2 <- matrix(nrow=4,ncol=4)
+testdata2[1,1]=0
+testdata2[1,2]=2
+testdata2[1,3]=1
+testdata2[1,4]=3
+testdata2[2,1]=-1
+testdata2[2,2]=2
+testdata2[2,3]=-1
+testdata2[2,4]=2
+testdata2[3,1]=4
+testdata2[3,2]=-4
+testdata2[3,3]=1
+testdata2[3,4]=0
+testdata2[4,1]=34
+testdata2[4,2]=1
+testdata2[4,3]=4
+testdata2[4,4]=-1
+det(testdata2)
+
+
+#Get the dimension of the matrix first
+SqMtrxDmnsn <-as.numeric(readline(prompt="Dimension of square matrix"))
+inputmatrix <- matrix(0,nrow=SqMtrxDmnsn,ncol=SqMtrxDmnsn)
+
+#Initializer that prompts user to enter the elements of the matrix
+#Matrix Writer Function for input matrix
+for(i in 1:SqMtrxDmnsn)
+  {for(j in 1:SqMtrxDmnsn)
+  {
+  inputmatrix[i,j] <- as.numeric(readline(prompt="Enter element (L to R then Top to Bottom)"))  
+  j=j+1
+  }
+  i=i+1
+  }
+
+detrmntdos <- function(x) {
+  #Basic determinant formula
+  dos<-x[1,1]*x[2,2]-x[1,2]*x[2,1]
+  return(dos)
+} 
+
+detrmnttres <- function(x) {
+  #Basketweave Method formula for a 3x3 Matrix: 
+  tres <- x[1,1]*x[2,2]*x[3,3]+x[1,2]*x[2,3]*x[3,1]+x[1,3]*x[2,1]*x[3,2]-x[3,1]*x[2,2]*x[1,3]-x[3,2]*x[2,3]*x[1,1]-x[3,3]*x[2,1]*x[1,2]
+  return(tres)
+}
+
+#Matrix by Cofactors Loop Method (I will always use row 1 for expansion to simplify the algo)
+#If I still have time: Scale down until it's a 3x3 matrix to apply detrmnttres function from above and return the ultimate determinant
+#If Murphy's law at work: I'll use det for matrices higher than 3x3 but improve this code before end of term. 
+detrmntgeneral <- function(x) {
+  totalna=0
+  col=1
+  cofactorsum=0
+  while(col<=ncol(x)) {
+    cofactorthing<-x[-1,(-1*col)]
+    print(det(cofactorthing))
+    multiplier<-(-1)^(1+col)
+    element<-x[1,col]
+    print(multiplier)
+    print(element)
+    print(element*multiplier*det(cofactorthing))
+    yup <- element*multiplier*det(cofactorthing)
+    cofactorsum = cofactorsum + yup
+    print(cofactorsum)
+    col=col+1
+  }
+  return(cofactorsum)
+  
+}
+
+detrmntgeneral(testdata2)
+
+
+if (SqMtrxDmnsn==2) {
+  detrmntdos(inputmatrix)
+} else if (SqMtrxDmnsn==3) {
+  detrmnttres(inputmatrix)
+} else if (SqMtrxDmnsn>3) {
+  detrmntgeneral(inputmatrix)
+} else print("Hey, invalid matrix yan, buddy!")
+\end{verbatim}
 
 
 \end{document}

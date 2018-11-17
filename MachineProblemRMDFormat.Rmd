@@ -3,6 +3,7 @@ title: "MachineProblemRMD"
 author: "Helen Mary Labao-Barrameda"
 date: "11/13/2018"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
