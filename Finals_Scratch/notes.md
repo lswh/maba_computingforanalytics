@@ -1,5 +1,9 @@
 # Outline
 
+* 1 RMarkdown
+* 1+ CSV File
+* 1 PDF Containing the Report
+
 ## Select Dataset
 
 ## Clean the Dataset using R
