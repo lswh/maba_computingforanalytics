@@ -1,32 +1,162 @@
 ---
-title: "Does (Macbook) Time Really Fly? An Analysis of Laptop Usage for 3 Months"
+title: "Does Time Really Fly? Exploring My 3-Month Macbook Usage"
 author: "Helen Mary Labao-Barrameda"
 date: "11/18/2018"
 output: html_document
 ---
 
 
-
-```{r setup, include=FALSE, echo=FALSE}
+```{r byline, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+\begin{center}by Helen Mary Labao-Barrameda\end{center}
 
-## R Markdown
+## Executive Summary
+The bullet journal method combined with a granular analysis of my personal activity in my Macbook tries to get a grasp or idea of how mood and energy can affect personal productivity in a multi-faceted life setup.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+It mainly aims to shed light on some life questions such as: where goes my time go when I am working? How can I improve my life with better time and energy management? 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+Install library dependencies first to ensure that code will run seamlessly:
+```{r library, warning=FALSE, results='hide'}
+library(ggplot2)
 ```
 
-## Including Plots
+## Exploratory Data Analyses
+Two datasets were included in this submission. The main dataset involves 400+ hours on the Macbook analyzed within a 3-month period (FinalExamData_Barrameda_raw.csv). As a supplement, I also  digitized my bullet journal entries documenting my mood, basic nutrition, and recreational activities (BulletJournalData.csv). 
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r dataset, warning=FALSE}
+# load the datasets
+mood<-read.csv('BulletJournalData.csv')
+macbook<-read.csv('FinalExamData_Barrameda_raw.csv')
+# show the structure of the dataset
+head(mood)
+head(macbook)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+After seeing the makeup of our dataset, we need to do something for some of the fields to make our further calculations meaningful--we need to represent some of them as factors.
+
+```{r factor, warning=FALSE}
+mtcars$cyl <- factor(mtcars$cyl)
+mtcars$vs <- factor(mtcars$vs)
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+mtcars$am <- factor(mtcars$am,labels=c('Auto','Manual'))
+```
+
+
+
+## Statistical Linear Regression Models
+
+Since we're primarily interested in the effect of the type of transmission on the MPG, let's try to fit a simple model with transmission type as the predictor variable and MPG as the outcome variable.
+```{r model1, warning=FALSE, results='hide'}
+model_am <- lm(mpg ~ am, data=mtcars)
+summary(model_am)
+```
+The slope is 7.245 which means that there is a 7.245 difference between automatic and manual transmission type of automobiles in terms of MPG. The p-value is equal to 0.000285 which is very small. The residual error is 4.902 on 30 degrees of freedom. But still, we need to find a better model.
+
+Now let's try to develop a model involving all of the variables as they affect MPG.
+
+```{r model2, warning=FALSE, results='hide'}
+model_all <- lm(mpg ~ ., data=mtcars)
+summary(model_all)
+```
+The residual standard error is 2.65 on 21 degrees of freedom. The adjusted R-squared value is 0.8066, which means that this model can explain 81% of the variance. The p-value is lower than the previous model, which is 3.793e-07. However, none of the coefficient is significant to any significance level.
+
+We'll then use stepwise regression to come up with the most apt model.
+
+```{r model3, warning=FALSE, results='hide'}
+model_step <- step(model_all)
+summary(model_step)
+```
+
+The result of the stepwise regression brings us to a model that only involves mpg, weight, qsec, and transmission type. the residual standard error is 2.459 on 28 degrees of freedom. The p-value is p-value: 1.21e-11, which is very reliable. The Adjusted R-squared value is 0.8336, which means that the model can explain about 83% of the variance of the MPG variable. All of the coefficients are significant at 0.05 significant level.
+
+```{r model4, warning=FALSE, results='hide'}
+model_other <- lm(mpg ~ wt + am + hp, data = mtcars)
+summary(model_other)
+```
+
+This model, which include the horsepower varialbe has a residual standard error of 2.538 on 28 degrees of freedom. 
+The Adjusted R-squared is  0.8227 and the p-value: 2.908e-11. This model performs very close to the previous one. 
+
+By analyzing the pairs plot (see Appendix), we can see that there's a strong relationship between wt and am. Let's factor this in on another model by including their product. This will be our final model.
+
+```{r model5, warning=FALSE, results='hide'}
+model_final <- lm(mpg ~ wt + qsec + am + am:wt, data = mtcars)
+summary(model_final)
+```
+This final model has the Residual standard error of 2.084 on 27 degrees of freedom. The p-value is 7.168e-13 (Whoaah!!)
+The Adjusted R-squared value is 0.8804, and all of the coefficients are significant at 0.01 significant level. This is the best model so far. We'll stop model building here.
+
+
+## Residuals
+Based on the residual plots (see Appendix, last chart), the residuals are normally distributed with constant variance, and it shows that they are independently, and randomly distributed. This results solidifies the robustness of the model, the final model.
+```{r residuals, warning=FALSE}
+
+sum((abs(dfbetas(model_final)))>1)
+```
+Dfbetas measure how much an observation has effected the estimate of a regression coefficient. In this case, we get a value of zero meaning it has no effect.
+
+## Regression Inference
+To infer if our predictive model is correct, let us check the aggregate mean for each type of cars and observe the MPG. Let's test this hypothesis: the null hypothesis that they came from the same population.
+```{r inference, warning=FALSE}
+# get the mean within each group
+aggregate(mpg~am, data=mtcars, mean)
+
+# validate the significance using t-test
+auto <- mtcars[mtcars$am == "Auto",]
+manual <- mtcars[mtcars$am == "Manual",]
+t.test(auto$mpg, manual$mpg)
+```
+The p-value is 0.00137 means that  we  have to reject our null hypothesis. So, the manual and automatic transmissions came from different populations. Also, the mean for MPG of manual transmitted cars is about 7 more than that of automatic transmitted cars.
+
+## Multivariable Regression Analysis
+Now, let's compare the different models in terms of the variance.
+```{r multi, warning=FALSE, results='hide'}
+anova(model_am, model_all,model_step, model_other, model_final)
+confint(model_final)
+```
+The result shows that  manual cars weighing 2000 lbs have 5.797 more MPG than an automatic automobile.
+
+```{r summary, warning=FALSE}
+
+summary(model_final)$coef
+```
+
+## Conclusion
+Based on several models and regression analysis, manual type cars are more efficient than automatic in terms of fuel efficiency. Generally, it was also verified that the lighter the car, the more fuel efficient it is.
+
+## Appendix
+
+```{r appendix, warning=FALSE}
+#Histogram of the MPG for Automatic and Manual Transmission
+ggplot(mtcars, aes(mpg)) + geom_histogram() + facet_grid(.~am) + labs(title = "MPG of Manual Transmission vs. Automatic", x = "Miles per Gallon")
+
+#Boxplot of the MPG for Automatic and Manual Transmission
+ggplot(mtcars, aes(am,mpg)) + geom_boxplot() + labs(x= "Transmission", y = "MPG", 
+title = "MPG of Manual Transmission vs. Automatic")
+
+#Scatterplot of the MPG for Automatic and Manual Transmission vs. Weight
+ggplot(mtcars, aes(x=wt, y=mpg, group=am, color=am)) + 
+xlab("weight")  + geom_point() + 
+scale_colour_discrete(labels=c("Automatic", "Manual"))   
+
+#Pairs plot of all the variables of mtcars dataset
+pairs(mtcars)
+
+#Residuals plot
+par(mfrow = c(2, 2))
+plot(model_final)
+```
+
+
+## References
+```{r}
+### * The Bullet Journal Method - https://bulletjournal.com/
+### * The 80/20 Principle: The Secret to Achieving More with Less by Richard Koch
+### * Time Management Guide - https://diggitymarketing.com/time-management-guide/
+### * 
+
+  
+```
