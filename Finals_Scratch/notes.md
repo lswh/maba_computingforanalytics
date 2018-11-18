@@ -7,17 +7,23 @@
 ## Select Dataset - done
 I chose to conduct an analysis of my Macbook computer usage for this final exam. My objective is to measure my personal productivity in using my Macbook. 
 Note that I am also using a Windows machine and a server-grade Ubuntu desktop, so this laptop usage is just a partial trace of my activities for the period of August 13 to morning November 18.
+
  
+
 
 ## Clean the Dataset using R
 
 * Raw Dataset
 FinalExamData_Barrameda_raw.csv
+* One Month Bullet Journal Log of Well-being
+BulletJournalData.csv
 
 * Tidied Dataset
-tidydata_FinalExamHMB,csv
+tidydata_FinalExamHMB.csv
+tidydata2_FinalExamHMB.csv
 
 * Code Book
+Timing App Personal Macbook Tracking Data
 ```
 ID - Activity ID of Timing App
 Duration - Number of seconds in the activity
@@ -28,6 +34,20 @@ Application - Specific App Used
 Title - Title on App Window 
 Path - File or URL path
 Containing Task IDs - I have not explored this feature yet on the tracking app so no significant data here
+```
+
+Bullet Journal Personal Tracker on Dot Grid Notebook
+```
+Days of Week
+Date
+Hours of Sleep
+Glasses of Water
+Vegetables
+Exercise
+Mood Signals
+Recreational Activities (Calligraphy, Reading, etc.)
+Study
+Work
 ```
 
 * Recipe for Cleaning the Dataset
