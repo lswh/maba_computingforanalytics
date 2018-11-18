@@ -1,39 +1,25 @@
-# Load the required packages:
-install.packages("devtools")
+## This is really incomplete code
+
+### Dependencies
 library(devtools)
 library(ggplot2)
 library(dplyr)
 library(reshape2)
 library(treemapify)
-library(reshape2)
-library(ggplotify)
+library(tidyr)
+library(ggpubr)
 
-#Please ensure glue is v1.3 for Mac; I got an error from that sucker
-
-mood<-read.csv('BulletJournalData.csv')
-macbook<-read.csv('FinalExamData_Barrameda_raw.csv')
-# show the structure of the dataset
-head(mood)
-head(macbook)
-
-summary(macbook)
-summary(mood)
-
-class(macbook)
-class(mood)
-
-colnames(macbook)
-
-head(macbook,5)
+### The Data
 
 
-# Which projects got the most time from August to November?
-#Bar chart
-colnames(macbook)
+head(mood,1)
+head(macbook,1)
 
+### Preliminary Data Munging
 
-# How many hours were spent per project
+#### Computing Concepts Applied per Chart
 
+#Munging for Treemap Outlining My Computer Hour Distribution
 topprojects <- tapply(macbook$Duration/3600,macbook$Project,sum)
 topprojectsbarchart <- data.frame(Priority=names(topprojects), Hours=topprojects)
 topprojectsbarchart <- mutate(topprojectsbarchart, LifeCategory = "Life")
@@ -46,35 +32,39 @@ topprojectsbarchart[6,3]<-"Personal"
 topprojectsbarchart[7,3]<-"Acads"
 topprojectsbarchart[8,3]<-"Data"
 
-topprojs <- ggplot(topprojectsbarchart, aes(x = Priority, y = Hours)) + geom_col(colour= "pink", fill="blue", mapping=NULL,topprojectsbarchart,position="stack",width=NULL,na.rm=TRUE,show.legend=TRUE,inherit.aes=TRUE)
-topprojs <- topprojs + theme(axis.text = element_text(size = 6)) 
-topprojs
+#Munging for Most Active Weekdays
+# 1 Row is One Keystroke detected by the Timing App on Macbook
+weekdayds <- mutate(macbook, KeyStrokes=1,Day=as.POSIXlt(Date)$wday)
+head(weekdayds)
+weekdayds<-weekdayds[order(weekdayds$Day),]
+head(weekdayds)
+tail(weekdayds)
+weekdayds$Day <- recode(weekdayds$Day, 
+                        "0"="Sunday",
+                        "1"="Monday",
+                        "2"="Tuesday",
+                        "3"="Wednesday",
+                        "4"="Thursday",
+                        "5"="Friday",
+                        "6"="Saturday")
 
-treemapcoords <- treemapify(topprojectsbarchart, area="Hours")
-head(treemapcoords)
-topprojtreemap<- ggplot(topprojectsbarchart, ggplot2::aes(area=Hours,fill=LifeCategory,label = Priority)) + geom_treemap() + geom_treemap_text(grow=TRUE) + labs(title="H's Life Priority in Computer Hours")
-topprojtreemap
+head(weekdayds)
 
+weekdayplot<-ggplot(weekdayds, aes(x=Day)) + geom_bar(fill="blue")
 
-# Top Macbook Applications
-
-
-#Bar chart
-
-# Top Guilty Pleasures
-# A Simple List will Do
-
-## Determine the formula and create a new productivity dataset by day
-# Calculate my productivity per day 
-
-# Which Day is My Most Productive Day? My Most Productive Time? 
-#Average productivity per day
-
-## Add a self-care score column on mood dataset
-
-## Merge productivity score dataset with mood dataset
-
-## Correlate Self-Care and Productivity Scores for Linear Regression
+#Munging for Guilty Pleasures Chart
+personaldeepdive<-filter(macbook,Project=="Personal Time")
+head(personaldeepdive)
+path<-count(personaldeepdive,Path)
+app<-count(personaldeepdive,Application)
+app<-filter(app,n>=100)
+app
 
 
- 
+### Super #WorkisLife, Apparently!
+#Initially I did a bar chart but Cascadeo's hours stacked too high
+#I sought the Treemapify library to extend ggplot to create a treemap diagram.
+#Commented out the initial work I did which was not as pretty.
+#topprojs <- ggplot(topprojectsbarchart, aes(x = Priority, y = Hours)) + geom_col(colour= "pink", fill="blue", mapping=NULL,topprojectsbarchart,position="stack",width=NULL,na.rm=TRUE,show.legend=TRUE,inherit.aes=TRUE)
+#topprojs <- topprojs + theme(axis.text = element_text(size = 6)) 
+#topprojs
