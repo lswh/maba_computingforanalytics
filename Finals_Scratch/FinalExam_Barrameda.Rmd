@@ -2,7 +2,9 @@
 title: "Exploring My Life, Mood, and 3-Month Macbook Usage"
 author: "Helen Mary Labao-Barrameda"
 date: "11/18/2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 
@@ -20,9 +22,13 @@ It mainly aims to shed light on some questions such as: where does my time go wh
 Install library dependencies first to ensure that code will run seamlessly:
 ```{r library, warning=FALSE, results='hide'}
 library(ggplot2)
+library(dplyr)
 ```
 
 ## Exploratory Data Analyses
+
+### The Data
+
 Two datasets were included in this submission. The main dataset involves 400+ hours on the Macbook analyzed within a 3-month period (FinalExamData_Barrameda_raw.csv). As a supplement, I also  digitized my bullet journal entries documenting my mood, basic nutrition, and recreational activities (BulletJournalData.csv). 
 
 ```{r dataset, warning=FALSE}
@@ -30,18 +36,23 @@ Two datasets were included in this submission. The main dataset involves 400+ ho
 mood<-read.csv('BulletJournalData.csv')
 macbook<-read.csv('FinalExamData_Barrameda_raw.csv')
 # show the structure of the dataset
-head(mood)
-head(macbook)
+head(mood,2)
+head(macbook,2)
 ```
 
-After seeing the makeup of our dataset, we need to do something for some of the fields to make our further calculations meaningful--we need to represent some of them as factors.
+### Munging the Data
 
-```{r factor, warning=FALSE}
-mtcars$cyl <- factor(mtcars$cyl)
-mtcars$vs <- factor(mtcars$vs)
-mtcars$gear <- factor(mtcars$gear)
-mtcars$carb <- factor(mtcars$carb)
-mtcars$am <- factor(mtcars$am,labels=c('Auto','Manual'))
+After some rudimentary cleaning of the CSV files in Excel (haha this is still part 1 of the course, right?), I began subsetting and working on deriving insights from these 2 sets of information on hand. 
+
+# How I Spend Time on My Computer-Related Projects
+```{r factor, warning=FALSE, echo=FALSE}
+topprojects <- tapply(macbook$Duration/3600,macbook$Project,sum)
+topprojectsbarchart <- data.frame(Priority=names(topprojects), Hours=topprojects)
+
+topprojs <- ggplot(topprojectsbarchart, aes(x = Priority, y = Hours)) + geom_col(colour= "pink", fill="blue", mapping=NULL,topprojectsbarchart,position="stack",width=NULL,na.rm=TRUE,show.legend=TRUE,inherit.aes=TRUE)
+
+topprojs <- topprojs + theme(axis.text = element_text(size = 6)) 
+topprojs
 ```
 
 
@@ -102,54 +113,24 @@ Dfbetas measure how much an observation has effected the estimate of a regressio
 ## Regression Inference
 To infer if our predictive model is correct, let us check the aggregate mean for each type of cars and observe the MPG. Let's test this hypothesis: the null hypothesis that they came from the same population.
 ```{r inference, warning=FALSE}
-# get the mean within each group
-aggregate(mpg~am, data=mtcars, mean)
 
-# validate the significance using t-test
-auto <- mtcars[mtcars$am == "Auto",]
-manual <- mtcars[mtcars$am == "Manual",]
-t.test(auto$mpg, manual$mpg)
 ```
 The p-value is 0.00137 means that  we  have to reject our null hypothesis. So, the manual and automatic transmissions came from different populations. Also, the mean for MPG of manual transmitted cars is about 7 more than that of automatic transmitted cars.
 
 ## Multivariable Regression Analysis
 Now, let's compare the different models in terms of the variance.
 ```{r multi, warning=FALSE, results='hide'}
-anova(model_am, model_all,model_step, model_other, model_final)
-confint(model_final)
+
 ```
 The result shows that  manual cars weighing 2000 lbs have 5.797 more MPG than an automatic automobile.
 
 ```{r summary, warning=FALSE}
 
-summary(model_final)$coef
 ```
 
 ## Conclusion
-Based on several models and regression analysis, manual type cars are more efficient than automatic in terms of fuel efficiency. Generally, it was also verified that the lighter the car, the more fuel efficient it is.
 
-## Appendix
 
-```{r appendix, warning=FALSE}
-#Histogram of the MPG for Automatic and Manual Transmission
-ggplot(mtcars, aes(mpg)) + geom_histogram() + facet_grid(.~am) + labs(title = "MPG of Manual Transmission vs. Automatic", x = "Miles per Gallon")
-
-#Boxplot of the MPG for Automatic and Manual Transmission
-ggplot(mtcars, aes(am,mpg)) + geom_boxplot() + labs(x= "Transmission", y = "MPG", 
-title = "MPG of Manual Transmission vs. Automatic")
-
-#Scatterplot of the MPG for Automatic and Manual Transmission vs. Weight
-ggplot(mtcars, aes(x=wt, y=mpg, group=am, color=am)) + 
-xlab("weight")  + geom_point() + 
-scale_colour_discrete(labels=c("Automatic", "Manual"))   
-
-#Pairs plot of all the variables of mtcars dataset
-pairs(mtcars)
-
-#Residuals plot
-par(mfrow = c(2, 2))
-plot(model_final)
-```
 
 
 ## References
