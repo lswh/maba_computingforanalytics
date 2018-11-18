@@ -1,5 +1,5 @@
 ---
-title: "Does Time Really Fly? Exploring My 3-Month Macbook Usage"
+title: "Exploring My Life, Mood, and 3-Month Macbook Usage"
 author: "Helen Mary Labao-Barrameda"
 date: "11/18/2018"
 output: html_document
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Executive Summary
 The bullet journal method combined with a granular analysis of my personal activity in my Macbook tries to get a grasp or idea of how mood and energy can affect personal productivity in a multi-faceted life setup.
 
-It mainly aims to shed light on some life questions such as: where goes my time go when I am working? How can I improve my life with better time and energy management? 
+It mainly aims to shed light on some questions such as: where does my time go when I am working? How can I improve my life with better time and energy management? 
 
 
 Install library dependencies first to ensure that code will run seamlessly:
@@ -45,8 +45,9 @@ mtcars$am <- factor(mtcars$am,labels=c('Auto','Manual'))
 ```
 
 
+## 
 
-## Statistical Linear Regression Models
+## Correlating My Habits with Productivity at Work Per Day
 
 Since we're primarily interested in the effect of the type of transmission on the MPG, let's try to fit a simple model with transmission type as the predictor variable and MPG as the outcome variable.
 ```{r model1, warning=FALSE, results='hide'}
