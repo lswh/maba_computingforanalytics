@@ -1,5 +1,5 @@
 ---
-title: "FinalExam_Barrameda"
+title: "Does (Macbook) Time Really Fly? An Analysis of Laptop Usage for 3 Months"
 author: "Helen Mary Labao-Barrameda"
 date: "11/18/2018"
 output: html_document
