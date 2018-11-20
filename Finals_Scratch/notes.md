@@ -66,6 +66,6 @@ I shall use ggplot2 or whichever works for me today.
 * Percentage Productivity for the Last 3 Months
 
 
-## Install TEX Requirement for PDF Knit -- DONE
-
+# References Considered:
+https://datascienceplus.com/story-of-pairs-ggpairs-and-the-linear-regression/
  
