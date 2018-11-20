@@ -4,6 +4,12 @@
 * 1+ CSV File
 * 1 PDF Containing the Report
 
+## Feedback from Prof
+1. Improve the narrative 
+2. Laymanize
+3. Remove the elements that cut through the flow of the analysis
+
+
 ## Select Dataset - done
 I chose to conduct an analysis of my Macbook computer usage for this final exam. My objective is to measure my personal productivity in using my Macbook. 
 Note that I am also using a Windows machine and a server-grade Ubuntu desktop, so this laptop usage is just a partial trace of my activities for the period of August 13 to morning November 18.
